@@ -1,0 +1,72 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* add this line to see the outline of each element */
+    /* outline: 1px solid #f00 !important; */
+}
+
+
+/* Header */
+.navbar-bg {
+    background-color: #094D92;
+}
+
+.active {
+    color: rgb(149, 131, 131);
+    /* Change to your desired color */
+}
+
+.nav-link {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Footer */
+footer {
+    color: white;
+    background-color: #094D92;
+}
+
+/* dashboard */
+
+#bd-mode-toggle {
+    z-index: 1500;
+}
+
+#bd-mode-toggle .dropdown-menu .active .bi {
+    display: block !important;
+}
+
+.login-bg {
+    background-color: rgb(236, 236, 236);
+}
+
+.login-container {
+    height: 100dvh;
+}
+
+.page-bg {
+    background-image: url(https://www.tapscape.com/wp-content/uploads/2022/02/The-.png);
+    width: 100%;
+    height: 100dvh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Input outline */
+.form-control:focus,
+.form-select:focus {
+    border-color: #03002a !important;
+    box-shadow: 0 0 0 0.2rem rgba(6, 0, 62, 0.25) !important;
+    border: 1px !important;
+}
