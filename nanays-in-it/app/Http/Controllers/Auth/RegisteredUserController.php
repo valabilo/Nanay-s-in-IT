@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'gender' => 'required|in:Male,Female,Other',
             'role_id' => 'nullable|integer'
     ]);
-    
+
     // Create a new user instance
         $user = new User();
         $user->first_name = $request->input('first_name');
@@ -63,6 +63,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('login', absolute: false));
     }
 }

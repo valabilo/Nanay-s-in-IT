@@ -54,7 +54,7 @@ const ThemeChanger = ({ children }) => {
             </svg>
 
             <Dropdown className="dropdown position-fixed bottom-0 end-0 mb-4 me-4 shadow border-2" id="bd-mode-toggle">
-                <Dropdown.Toggle className="btn btn-bd-primary gap-1 py-3 dropdown-toggle d-flex align-items-center"
+                <Dropdown.Toggle className="btn btn-sm btn-bd-primary gap-1 py-3 dropdown-toggle d-flex align-items-center"
                     id="bd-theme"
                     as={Button}
                     aria-expanded="false"

@@ -1,13 +1,20 @@
 import { useState } from 'react';
-import { Link } from '@inertiajs/react';
-import { Navbar, Container, Nav, Collapse, Button, ListGroup, Form, Dropdown } from "react-bootstrap";
+import { Navbar, NavDropdown, Container, Nav, Collapse, Button, ListGroup, Form, Dropdown } from "react-bootstrap";
+import ThemeChanger from './ThemeChanger';
+import { InertiaLink } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/inertia-react';
+import DashboardSidebar from './DashboardSidebar/DashboardSidebar'
+import LearnerSidebar from '@/Layouts/DashboardSidebar/LearnerSidebar';
+import FacilitatorSidebar from './DashboardSidebar/FacilitatorSidebar';
+import InstructorSidebar from './DashboardSidebar/InstructorSidebar';
+import { usePage } from '@inertiajs/react';
 
 
-export default function Authenticated({ user, header, children }) {
-
+export default function Authenticated({ user, children }) {
     const [openCollapse, setOpenCollapse] = useState({});
     const [activeMainButton, setActiveMainButton] = useState('false');
     const [activeCollapseButton, setActiveCollapseButton] = useState('');
+    const { auth } = usePage().props
 
     const toggleCollapse = (collapseId) => {
         setOpenCollapse(prevState => ({
@@ -28,166 +35,57 @@ export default function Authenticated({ user, header, children }) {
     const handleCollapseButtonClick = (buttonId) => {
         setActiveCollapseButton(activeCollapseButton === buttonId ? '' : buttonId);
     };
+    const initials = `${auth.user.first_name[0].toUpperCase()}${auth.user.last_name[0].toUpperCase()}`;
+    const roleName = `${auth.user.role.role_name}`;
+    const roleInitials = `${auth.user.role.role_name[0].toUpperCase()}`
 
-    const initials = `${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`;
+    let SidebarComponent;
+    switch (roleName) {
+        case 'Admin':
+            SidebarComponent = DashboardSidebar;
+            break;
+        case 'Learner':
+            SidebarComponent = LearnerSidebar;
+            break;
+        case 'Facilitator':
+            SidebarComponent = FacilitatorSidebar;
+            break;
+        case 'Instructor':
+            SidebarComponent = InstructorSidebar;
+            break;
+    }
 
-    const getRoleName = (role_id) => {
-        switch (role_id) {
-            case 1:
-                return 'Admin';
-            case 2:
-                return 'Instructor';
-            case 3:
-                return 'Facilitator';
-            case 4:
-                return 'Learner';
-            default:
-                return '';
-        }
-    };
 
-    const roleName = getRoleName(user.role_id);
     return (
         <Container fluid>
             <div className="row flex-nowrap">
-                <div className="side-bar col-auto col-md-3 col-xl-2 bg-tertiary text-light shadow">
-                    <div className="d-flex flex-column flex-shrink-0 ps-lg-3 py-3 min-vh-100">
+                <div className="side-bar col-auto px-0 px-lg-2 col-md-3 col-xl-2 bg-tertiary text-light shadow">
+                    <div className="d-flex flex-column flex-shrink-0 px-lg-3 py-3 min-vh-100">
                         <div className="d-flex justify-content-center mb-3 text-success-emphasis">
-                            <h3 className="d-lg-none">A</h3>
-                            <span className="fs-5 fw-bold d-none d-sm-inline">{roleName}</span>
+                            <h3 className="d-lg-none">{roleInitials}</h3>
+                            <h3 className="fw-bold d-none d-sm-inline">{roleName}</h3>
                         </div>
-                        <Nav fill variant="tabs" className="mb-auto border-0 flex-column mb-0 just align-content-stretch" id="menu">
-                            <Nav.Item>
-                                <Nav.Link href="#1" className={`d-flex gap-1 justify-content-lg-start justify-content-center border-0 align-items-center btn px-0 align-middle ${activeMainButton === 'dashboard' ? 'active' : ''}`} onClick={() => handleMainButtonClick('dashboard')}>
-                                    <i className="fs-5 bi bi-file-earmark-code"></i> <span className={`ms-1 d-none d-sm-inline`}>Dashboard</span>
-                                </Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link onClick={() => { toggleCollapse('programs'); setActiveMainButton('programs') }} href="#submenu1" data-bs-toggle="collapse" data-bs-target="#collapse-programs" aria-expanded={openCollapse['programs']}
-                                    aria-controls="collapse-programs"
-                                    className={`d-flex gap-1 justify-content-lg-start justify-content-center border-0 align-items-center btn px-0 align-middle ${activeMainButton === 'programs' ? 'active' : ''}`}>
-                                    <i className={`fs-5 bi-speedometer2 ${openCollapse['programs'] ? 'bi-chevron-down' : 'bi-chevron-right'}`}></i> <span className="ms-1 me-auto d-none d-sm-inline">Programs</span>
-                                </Nav.Link>
-                                <Collapse in={openCollapse['programs']}>
-                                    <ListGroup variant="flush px-3">
-                                        <ListGroup.Item
-                                            className={`d-grid gap-2 p-0`}
-                                        >
-                                            <Button
-                                                variant="flat"
-                                                href="#"
-                                                className={`btn ${activeCollapseButton === 'programs-1' ? 'active' : ''}`}
-                                                onClick={() => handleCollapseButtonClick('programs-1')}
-                                            >
-                                                Web Dev
-                                            </Button>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item
-                                            className={`d-grid gap-2 p-0`}
-                                        >
-                                            <Button
-                                                variant="flat"
-                                                href="#"
-                                                className={`btn ${activeCollapseButton === 'program-2' ? 'active' : ''}`}
-                                                onClick={() => handleCollapseButtonClick('program-2')}
-                                            >
-                                                Python/AI
-                                            </Button>
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                </Collapse>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link
-                                    onClick={() => { toggleCollapse('settings'); setActiveMainButton('settings') }}
-                                    aria-controls="collapse-settings"
-                                    aria-expanded={openCollapse['settings']}
-                                    href="#submenu2"
-                                    data-bs-toggle="collapse"
-                                    className={`d-flex gap-1 justify-content-lg-start justify-content-center border-0 align-items-center btn px-0 align-middle ${activeMainButton === 'settings' ? 'active' : ''}`}>
-                                    <i className="fs-5 bi bi-people"></i>
-                                    <span className="ms-1 d-none d-sm-inline">Users</span>
-                                </Nav.Link>
-                                <Collapse in={openCollapse['settings']}>
-                                    <ListGroup variant="flush px-3">
-                                        <ListGroup.Item
-                                            className={`d-grid gap-2 p-0`}
-                                        >
-                                            <Button
-                                                variant="flat"
-                                                href="#"
-                                                className={`btn ${activeCollapseButton === 'settings-1' ? 'active' : ''}`}
-                                                onClick={() => handleCollapseButtonClick('settings-1')}
-                                            >
-                                                Instructors
-                                            </Button>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item
-                                            className={`d-grid gap-2 p-0`}
-                                        >
-                                            <Button
-                                                variant="flat"
-                                                href="#"
-                                                className={`btn ${activeCollapseButton === 'settings-2' ? 'active' : ''}`}
-                                                onClick={() => handleCollapseButtonClick('settings-2')}
-                                            >
-                                                Facilitatiors
-                                            </Button>
-                                        </ListGroup.Item>
-                                        <ListGroup.Item
-                                            className={`d-grid gap-2 p-0`}
-                                        >
-                                            <Button
-                                                variant="flat"
-                                                href="#"
-                                                className={`btn ${activeCollapseButton === 'settings-3' ? 'active' : ''}`}
-                                                onClick={() => handleCollapseButtonClick('settings-3')}
-                                            >
-                                                Learners
-                                            </Button>
-                                        </ListGroup.Item>
-                                    </ListGroup>
-                                </Collapse>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link
-                                    href="#2"
-                                    className={`d-flex gap-1 justify-content-lg-start justify-content-center border-0 align-items-center btn px-0 align-middle ${activeMainButton === 'components' ? 'active' : ''}`}
-                                    onClick={() => handleMainButtonClick('components')}>
-                                    <i className="fs-5 bi bi-gear"></i> <span className={`ms-1 d-none d-sm-inline`}>Components</span>
-                                </Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link
-                                    href="#3"
-                                    className={`d-flex gap-1 justify-content-lg-start justify-content-center border-0 align-items-center btn px-0 align-middle ${activeMainButton === 'roles' ? 'active' : ''}`}
-                                    onClick={() => handleMainButtonClick('roles')}>
-                                    <i className="fs-5 bi bi-person-gear"></i> <span className={`ms-1 d-none d-sm-inline`}>Roles</span>
-                                </Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                        <hr className="me-lg-5 me-2" />
-                        <Dropdown size="sm" className="justify-content-end" id="bd-mode-toggle">
-                            <Dropdown.Toggle className="btn btn-bd-primary gap-1 p-1 dropdown-toggle d-flex align-items-center text-decoration-none"
-                                id="bd-theme"
-                                as={Button}
-                                variant='link'
-                                aria-expanded="false"
-                                data-bs-toggle="dropdown">
-                                <span className="bg-secondary text-light rounded-circle p-1 text-align-center fs-6" style={{ width: '33px', height: '33px', display: 'inline-block' }}>{initials}</span>
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu className="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-                                <Dropdown.Item className=' p-0'>
-                                    <Link href={route('profile.edit')} className='text-decoration-none'>Profile</Link></Dropdown.Item>
-                                <Dropdown.Item className=' p-0'>
-                                    <Link method='post' href={route('logout')} className='text-decoration-none'>Log Out</Link>
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
+                        <SidebarComponent
+                            openCollapse={openCollapse}
+                            activeMainButton={activeMainButton}
+                            setActiveMainButton={setActiveMainButton}
+                            activeCollapseButton={activeCollapseButton}
+                            toggleCollapse={toggleCollapse}
+                            handleMainButtonClick={handleMainButtonClick}
+                            handleCollapseButtonClick={handleCollapseButtonClick}
+                        />
+                        <hr className="me-lg-3 me-2" />
+                        <NavDropdown title={<span className="bg-secondary text-light rounded-circle p-1 text-center fs-6" style={{ width: '33px', height: '33px', display: 'inline-block' }}>{initials}</span>} id="basic-nav-dropdown">
+                            <NavDropdown.Item as={Link} href={route('profile.edit')} className='text-decoration-none'>Profile</NavDropdown.Item>
+
+                            <NavDropdown.Item>
+                                <Link method="POST" href={route('logout')} className='btn btn-link px-0 text-light-emphasis text-decoration-none'>Logout</Link>
+                            </NavDropdown.Item>
+                        </NavDropdown>
                     </div>
                 </div>
                 <div className="col p-0">
-                    <Navbar className="navbar bg-tertiary px-lg-3 px-0 nav-shadow" collapseOnSelect expand="lg" sticky="top">
+                    <Navbar className="navbar bg-info-subtle px-lg-3 px-0 nav-shadow" collapseOnSelect expand="lg" sticky="top">
                         <Container className="px-2 px-lg-4 align-content-center">
                             <Navbar.Brand className="fs-4 fw-bold" href={route('dashboard')} active={route().current('dashboard') ? 'true' : 'false'}>Nanay's in IT</Navbar.Brand>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -210,14 +108,15 @@ export default function Authenticated({ user, header, children }) {
                             </Navbar.Collapse>
                         </Container>
                     </Navbar>
-                    <div className="content-wrapper p-3">
-                        <h3>Content area...</h3>
-                        <main>
-                            {children}
-                        </main>
+                    <div className="content-wrapper p-3 bg-body-secondary">
+                        <ThemeChanger>
+                            <main className='rounded-top'>
+                                {children}
+                            </main>
+                        </ThemeChanger>
                     </div>
                 </div>
-            </div>
-        </Container>
+            </div >
+        </Container >
     );
 }

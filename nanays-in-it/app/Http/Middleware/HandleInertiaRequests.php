@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-
 class HandleInertiaRequests extends Middleware
 {
     /**
@@ -32,7 +31,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user() ? $request->user()->load('role') : null, // Eager-load the role relationship
             ],
         ];
     }

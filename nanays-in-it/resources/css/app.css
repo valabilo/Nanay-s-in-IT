@@ -13,11 +13,18 @@
     /* outline: 1px solid #f00 !important; */
 }
 
+body {
+    font-family: "Fira Sans", sans-serif;
+}
+
+font-style
 
 /* Header */
 .navbar-bg {
     background-color: #094D92;
 }
+
+/*  */
 
 .active {
     color: rgb(149, 131, 131);
@@ -26,8 +33,7 @@
 
 .nav-link {
     font-family: "Fira Sans", sans-serif;
-    font-weight: 500;
-    font-style: normal;
+    font-weight: 600;
 }
 
 /* Footer */
@@ -69,4 +75,131 @@ footer {
     border-color: #03002a !important;
     box-shadow: 0 0 0 0.2rem rgba(6, 0, 62, 0.25) !important;
     border: 1px !important;
+}
+
+#img {
+    max-height: 80dvh;
+    object-fit: cover;
+}
+
+.gradpic {
+    width: 100%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+/* slider */
+.slider {
+    margin: 0 20px;
+    overflow: "hidden";
+    padding: 2rem 0;
+}
+
+.slider img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.react-multi-carousel-list {
+    padding: 0rem 0 2rem 0;
+}
+
+.custom-dot-list-style button {
+    border: none;
+    background: rgb(255, 68, 68);
+}
+
+.react-multi-carousel-dot.react-multi-carousel-dot--active button {
+    background: rgb(255, 68, 68) !important;
+}
+
+.testimony-card {
+    margin-right: 1.5rem;
+    /* Default margin-right for desktop */
+}
+
+@media (max-width: 1024px) {
+    .feature-card {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .feature-card {
+        margin-right: 5px;
+    }
+}
+
+.logo-1 {
+    mix-blend-mode: multiply;
+}
+
+.logo-font {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 600;
+}
+
+.feature-content {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 300;
+    user-select: none;
+}
+
+.feature-item {
+    font-family: "Fira Sans", sans-serif;
+    font-weight: 500;
+}
+
+.pl-bg {
+    background-image: url('/images/tech-bg2.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.partner-logo {
+    width: 10rem;
+    mix-blend-mode: multiply;
+}
+
+.python {
+    mix-blend-mode: multiply;
+}
+
+.hlight-bg {
+    background-image: url('/images/highlight-bg.jpg');
+    background-size: fill;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+}
+
+.side-bar {
+    height: 100dvh;
+    overflow-y: auto;
+}
+
+.content-wrapper {
+    overflow-y: auto;
+    height: 91.5dvh;
+}
+
+.nav-shadow {
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+
+.btn:focus,
+.btn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+.program-title {
+    text-shadow: 2px 2px rgb(249, 127, 127);
+}
+
+.terms {
+    font-size: 12px;
 }

@@ -8,6 +8,8 @@ import PasswordInput from '@/Components/PasswordInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Form, Row, Col, Container, InputGroup, Button, Alert } from 'react-bootstrap';
+import { InertiaLink } from '@inertiajs/inertia-react';
+import ApplicationLogo from '@/Components/ApplicationLogo';
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -40,8 +42,11 @@ export default function Login({ status, canResetPassword }) {
             <Container fluid className='px-0'>
                 <Head title="Log in" />
                 <Row className="login-container align-content-center mx-0">
-                    <Col md={{ span: 4, offset: 2 }} xs={{ span: 10, offset: 1 }} className='form-bg bg-light border border-success border-opacity-25 shadow-lg rounded p-lg-5 p-3'>
-                        <h3 className='text-center mb-3'>Nanay's in IT</h3>
+                    <Col md={{ span: 4, offset: 2 }} xs={{ span: 10, offset: 1 }} className='bg-body-tertiary border border-success border-opacity-25 shadow-lg rounded p-lg-5 p-3'>
+                        <div className='d-flex justify-content-center mb-3'>
+                            <ApplicationLogo width="45" height="45" className="h3" />
+                        </div>
+
                         {status && <Alert className="mb-4 font-medium text-sm text-green-600">{status}</Alert>}
                         <Form onSubmit={submit}>
                             <Form.Floating className="mb-3">

@@ -22,7 +22,7 @@ export default function ForgotPassword({ status }) {
 
             <Container>
                 <Row className='login-container align-content-center mx-0'>
-                    <Col lg={{ span: 6, offset: 1 }} xs={{ span: 10, offset: 1 }} className='form-bg bg-light border border-success border-opacity-25 shadow-lg rounded p-lg-5 p-3'>
+                    <Col lg={{ span: 6, offset: 1 }} xs={{ span: 10, offset: 1 }} className='form-bg bg-body-tertiary border border-success border-opacity-25 shadow-lg rounded p-lg-5 p-3'>
                         {status && <Alert variant='success' className="mb-3 p-2">{status}</Alert>}
                         <Form onSubmit={submit}>
                             <div className='mb-3'>
@@ -44,9 +44,9 @@ export default function ForgotPassword({ status }) {
 
 
                             <div className="d-flex justify-content-between align-items-center">
-                                <Link className='btn-link fs-6' variant='btn-link' href={route('login')}>
+                                <Link className='btn-link fs-6 text-decoration-none' variant='btn-link' href={route('login')}>
                                     <i className="bi bi-arrow-left-square me-1"></i>
-                                    <span>Login</span>
+                                    <span className=''>Login</span>
                                 </Link>
 
                                 <PrimaryButton className="" disabled={processing}>

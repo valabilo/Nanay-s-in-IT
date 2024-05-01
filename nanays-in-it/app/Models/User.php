@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Session; // Make sure to import the Session model
 
 class User extends Authenticatable
 {
@@ -37,18 +37,20 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    public $timestamps = false;
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Get the sessions associated with the user.
      */
-    protected function casts(): array
+    public function sessions()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Session::class);
+    }
+
+    /**
+     * Define the relationship with the Role model.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
 }

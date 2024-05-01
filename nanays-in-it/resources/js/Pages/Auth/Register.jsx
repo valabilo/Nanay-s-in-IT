@@ -8,7 +8,7 @@ import PasswordInput from '@/Components/PasswordInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Form, Container, Row, Col, Button, InputGroup } from 'react-bootstrap';
 
-export default function Register() {
+export default function Register({ auth }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         first_name: '',
         last_name: '',
@@ -46,7 +46,7 @@ export default function Register() {
             <Head title="Register" />
             <Container fluid className='px-0'>
                 <Row className='login-container align-content-center mx-0'>
-                    <Col md={{ span: 6, offset: 1 }} xs={{ span: 10, offset: 1 }} className='bg-light border border-success border-opacity-25 shadow-lg rounded p-lg-5 p-3'>
+                    <Col md={{ span: 6, offset: 1 }} xs={{ span: 10, offset: 1 }} className='bg-body-tertiary border border-success border-opacity-25 shadow-lg rounded p-lg-5 p-3'>
                         <h3 className='text-center mb-3'>Register</h3>
                         <Form onSubmit={submit}>
                             <Row className='mb-3'>
@@ -122,7 +122,7 @@ export default function Register() {
                                         />
                                         <InputGroup.Text>
                                             <Button variant='btn-link' className='btn-link text-decoration-none p-0 fs-6' onClick={handleShowPassword}>
-                                                {showPassword ? <i class="bi bi-eye-fill"></i> : <i class="bi bi-eye"></i>}
+                                                {showPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye"></i>}
                                             </Button>
                                         </InputGroup.Text>
                                         <InputError message={errors.password} className="fs-6" />
@@ -144,7 +144,7 @@ export default function Register() {
                                         />
                                         <InputGroup.Text>
                                             <Button variant='btn-link' className='btn-link text-decoration-none p-0 fs-6' onClick={handleShowPassword}>
-                                                {showPassword ? <i class="bi bi-eye-fill"></i> : <i class="bi bi-eye"></i>}
+                                                {showPassword ? <i className="bi bi-eye-fill"></i> : <i className="bi bi-eye"></i>}
                                             </Button>
                                         </InputGroup.Text>
                                         <InputError message={errors.password_confirmation} />

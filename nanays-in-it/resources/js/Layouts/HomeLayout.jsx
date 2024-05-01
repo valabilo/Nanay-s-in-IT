@@ -1,21 +1,22 @@
 
+// HomeLayout.jsx
 import { ThemeProvider } from "react-bootstrap";
-import Header from "./MainPage/Header";
-import Footer from "./MainPage/Footer";
-import Home from "@/Pages/Guest/Home";
-const RootLayout = ({ children, auth }) => {
+import Header from "./Partials/Header";
+import Footer from "./Partials/Footer";
+import { Head } from "@inertiajs/react";
+
+const HomeLayout = ({ children, auth, title }) => {
     return (
         <ThemeProvider
             breakpoints={['xxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
             minBreakpoint="xxs"
         >
+            <Head title={title} />
             <Header auth={auth} />
-            <div className="content">
-                <Home />
-            </div>
-
+            {children}
             <Footer />
         </ThemeProvider>
     );
-}
-export default RootLayout;
+};
+
+export default HomeLayout;
